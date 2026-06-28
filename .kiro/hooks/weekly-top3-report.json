@@ -1,0 +1,12 @@
+{
+  "name": "Weekly Top-3 Report",
+  "version": "1.0.0",
+  "description": "Compile the weekly Top-3 artists/tracks report every Sunday.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Compile the MainStay TV Weekly Top-3 report. Steps: 1) Query the analytics table for all posts from the past 7 days. 2) Calculate engagement score per artist: (views * 1) + (likes * 2) + (shares * 3) + (comments * 2) + (follows_gained * 5). 3) Rank artists/tracks by total engagement score. 4) Generate a markdown report saved to agent/reports/week-<YYYY-WW>.md with: week dates, Top-3 ranked artists with their tracks and scores, standout content formats, and a recommendation for next week's focus. 5) Insert the top 3 into the weekly_reports table. 6) Print the report."
+  }
+}

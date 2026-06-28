@@ -1,0 +1,48 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem@latest",
+        "C:/Users/Oatees/Documents/GitHub/MAINSTAY-TV/Content-data",
+        "C:/Users/Oatees/Documents/GitHub/MAINSTAY-TV"
+      ],
+      "disabled": false,
+      "autoApprove": ["read_file", "list_directory", "read_multiple_files"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "disabled": false,
+      "autoApprove": ["browser_navigate", "browser_screenshot", "browser_click"]
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
+      "disabled": false,
+      "autoApprove": ["fetch"]
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory@latest"],
+      "disabled": false,
+      "autoApprove": [
+        "create_entities",
+        "search_nodes",
+        "open_nodes",
+        "add_observations"
+      ]
+    },
+    "sqlite": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-sqlite",
+        "--db-path",
+        "C:/Users/Oatees/Documents/GitHub/MAINSTAY-TV/agent/mainstay.db"
+      ],
+      "disabled": false,
+      "autoApprove": ["read_query", "list_tables", "describe_table"]
+    }
+  }
+}

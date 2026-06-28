@@ -1,0 +1,12 @@
+{
+  "name": "Publish Today's Posts",
+  "version": "1.0.0",
+  "description": "Manually trigger publishing of all posts scheduled for today.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Query the posts table in agent/mainstay.db for all posts where scheduled_date = today and status = 'scheduled'. For each post: 1) Retrieve the asset filepath and caption from the database. 2) Attempt to publish using Playwright for the correct platform (tiktok, instagram_reel, instagram_story, instagram_feed, or whatsapp). 3) Save a confirmation screenshot to agent/screenshots/. 4) Update the post status to 'published' or 'manual-required' depending on result. 5) Print a summary of what was published and what needs manual action."
+  }
+}

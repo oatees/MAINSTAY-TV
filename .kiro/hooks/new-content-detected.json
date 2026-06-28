@@ -1,0 +1,13 @@
+{
+  "name": "New Content Detected",
+  "version": "1.0.0",
+  "description": "When a new media file lands in Content-data/, auto-scan and update the asset inventory.",
+  "when": {
+    "type": "fileCreated",
+    "patterns": ["Content-data/**/*.jpg", "Content-data/**/*.mp4", "Content-data/**/*.mp3", "Content-data/**/*.ogg"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A new file was just added to Content-data/. Scan the Content-data directory, classify the new asset (image/video/audio), identify which artist it belongs to based on the folder name, and insert it into the assets table in agent/mainstay.db. Then confirm: artist name, asset type, and filename."
+  }
+}

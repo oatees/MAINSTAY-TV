@@ -1,0 +1,12 @@
+{
+  "name": "Generate This Week's Schedule",
+  "version": "1.0.0",
+  "description": "Manually trigger the weekly schedule and caption generator.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Generate this week's full posting schedule for MainStay TV starting from next Monday. Steps: 1) Scan Content-data/ and ensure all assets are in the database. 2) Query unposted assets for both GOLIDE and Delah Dube. 3) Build a 7-day schedule using the weekly template (Mon=Instagram Feed, Tue=TikTok, Wed=Instagram Story, Thu=TikTok, Fri=Instagram Reel + WhatsApp). 4) Generate platform-specific captions for each post using the caption formula. 5) Insert all posts and captions into the database. 6) Export the full schedule with captions to agent/schedules/week-<YYYY-WW>.md. 7) Print the full calendar preview."
+  }
+}
