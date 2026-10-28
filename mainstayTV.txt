@@ -1,9 +1,23 @@
--a/an online channel
--entertainment medium
--a hosting platform
--essentially a stage
--multi-modal documentation/
--data source
--compiler for top 3 music of the week
--tiktok videos
--insatgram reels and stories
+- a channel: MainStay (@mainstay)
+- an entertainment and culture curation channel
+- a hosting platform and editorial stage
+- multi-modal documentation
+- a source-aware signal for relevant culture and media
+- a weekly compiler for the Top-3 music feature within broader culture coverage
+- TikTok videos
+- Instagram reels and stories
+- one name (@mainstay), one voice across surfaces
+
+CONCEPT NOTE:
+MainStay (@mainstay) is an entertainment and culture curation channel,
+not a music page with a manager attached. Music is part of its programming,
+but the channel can also cover other stories, media, and moments that fit
+its South African point of view. Delah Dube, GOLIDE, and their Content-data
+folders are initial programming, not the limit of the channel's identity.
+
+IDENTITY SURFACES (update these together on any rebrand):
+  1. agent/README.md  — platform/handle table + brand & voice section
+  2. agent/init-db.sql — file header + seed-data comment
+The DB schema, posts, captions, analytics, and the two Content-data
+artist folders are identity-neutral and survive a rename or roster
+change intact.
