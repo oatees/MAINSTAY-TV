@@ -1,11 +1,17 @@
--- MainStay TV — Social Media Manager Database
+-- MainStay — channel database
 -- Run: sqlite3 agent/mainstay.db < agent/init-db.sql
+--
+-- This schema is the channel's operating system: assets, posts, captions,
+-- analytics, and the weekly music Top-3. The channel keeps its name
+-- (@mainstay); its editorial concept can broaden without changing this
+-- schema. Artist roster/content are tracked separately in seed data and
+-- Content-data/.
 
 PRAGMA journal_mode=WAL;
 PRAGMA foreign_keys=ON;
 
 -- ─────────────────────────────────────────
--- ARTISTS
+-- ARTISTS (roster the channel currently presents)
 -- ─────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS artists (
   id                INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -15,7 +21,7 @@ CREATE TABLE IF NOT EXISTS artists (
   tiktok_handle     TEXT,
   active_campaign   BOOLEAN DEFAULT 1,
   notes             TEXT,
-  created_at        DATETIME DEFAULT CURRENT_TIMESTAMP
+  created_at         DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ─────────────────────────────────────────
@@ -112,8 +118,8 @@ CREATE TABLE IF NOT EXISTS weekly_reports (
 );
 
 -- ─────────────────────────────────────────
--- SEED DATA — Artist Roster
--- ─────────────────────────────────────────
+-- SEED DATA — roster the channel currently presents
+--─────────────────────────────────────────
 INSERT OR IGNORE INTO artists (id, name, genre, instagram_handle, tiktok_handle, notes) VALUES
 (1, 'Delah Dube',  'R&B / Soul',      '@delahdube',  '@delahdube',
    'Track: Songbird (Interlude). Singer-songwriter from SA.'),

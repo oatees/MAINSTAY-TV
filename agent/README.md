@@ -1,9 +1,28 @@
-# MainStay TV — Social Media Manager Agent
+# MainStay — channel operating system
 
-This folder is the agent's working directory.
+MainStay keeps `@mainstay` alive across surfaces. It is an entertainment and
+culture curation channel, not a music channel with a manager attached. Music
+is part of the programming, while the editorial identity can also cover other
+stories, media, and moments that fit MainStay's point of view.
+
+## What it is now
+- One account, several surfaces: TikTok, Instagram, WhatsApp.
+- One voice across those surfaces — captions read like the channel, not like
+  a template with a handle pasted in.
+- One weekly music ritual: the Top-3, an editorial pick of the tracks and
+  artists that mattered this week.
+- A roster it currently presents (Delah Dube, GOLIDE) and the content folders
+  that belong to those artists. The roster lives under the channel, not the
+  other way around; music promotion is a programming stream, not the whole
+  concept.
+
+## What it is not
+- Not a personal artist page. The channel is the brand; the artists are
+  programmed, not the homepage.
+- Not a one-off posting script. The doc, the DB seed, and the operating rules
+  are meant to outlast any single week's content.
 
 ## Structure
-
 ```
 agent/
 ├── mainstay.db          → SQLite database (posts, assets, captions, analytics)
@@ -35,14 +54,39 @@ If you don't have sqlite3 installed: https://sqlite.org/download.html
 
 ## Platforms
 
-| Platform | Handle | Automation |
-|----------|--------|-----------|
-| TikTok | @mainstaytv | Playwright (browser) |
-| Instagram | @mainstaytv | Playwright (browser) |
-| WhatsApp | MainStayTV channel | Playwright (browser) |
+| Platform | Handle |
+|----------|--------|
+| TikTok | @mainstay |
+| Instagram | @mainstay |
+| WhatsApp | MainStay channel |
+
+Automation for each surface is Playwright (browser) when a surface allows it;
+when a surface blocks automation, the agent outputs a manual guide with a
+copy-paste caption instead of pretending it posted.
+
+## Brand & voice
+`@mainstay` is one identity across surfaces. The name stays; the voice is the
+channel speaking as the channel. The concept can broaden without changing the
+handle, artist records, or database schema. If the actual social handles ever
+change, update this platform table; artist handles in the DB are separate.
+
+## Roster
+The current roster is seed data in `agent/init-db.sql` and content folders
+under `Content-data/`. Each artist keeps their own folder of media. The agent
+never moves assets out of `Content-data/`. The roster can grow or change as
+MainStay's editorial coverage broadens.
+
+## Operating rules
+- All media assets live in `Content-data/` — never move them
+- The channel will not post the same content to the same surface within 48 hours
+- WhatsApp is broadcast-only — max 2 posts per week
+- If a surface blocks automation, the agent outputs a manual guide with a
+  copy-paste caption
+- The weekly Top-3 is the channel's signature music feature within its broader editorial mix, not an afterthought
 
 ## Notes
-- All media assets live in `Content-data/` — never move them
-- The agent will never post the same content to the same platform within 48 hours
-- WhatsApp is broadcast-only — max 2 posts per week
-- If a platform blocks automation, the agent outputs a manual guide with copy-paste caption
+- If the roster changes, update `Content-data/` folders and `init-db.sql` seed
+  together; the channel name and handles are separate from the roster
+- The DB schema, posts, captions, and analytics carry the surface and the
+  asset — not the channel name directly — so most of the machine survives a
+  roster or concept change intact

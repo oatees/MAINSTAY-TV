@@ -1,7 +1,7 @@
 # Social Media Manager Agent — Requirements
 
 ## Overview
-An AI-powered social media manager agent for MainStay TV that handles content scheduling, artist promotion, and cross-platform publishing across TikTok, Instagram, and WhatsApp.
+An AI-powered social media curation agent for MainStay (@mainstay) that curates approved local assets and editorial inputs, frames relevant music and culture, schedules channel content, and supports cross-platform publishing across TikTok, Instagram, and WhatsApp. Artist promotion remains one programming stream, not the channel's whole identity. External YouTube or Spotify account connections are not yet implemented; recommendations must use available local assets and explicitly provided signals until those integrations are designed and authorized.
 
 ## Requirements
 
@@ -11,7 +11,7 @@ An AI-powered social media manager agent for MainStay TV that handles content sc
 **1.3** The agent MUST flag assets that have already been posted to avoid duplicates within 48 hours per platform.
 
 ### 2. Content Scheduling
-**2.1** The agent MUST generate a 7-day posting calendar when asked, distributing content across TikTok, Instagram, and WhatsApp.
+**2.1** The agent MUST generate a 7-day posting calendar when asked, distributing suitable available assets and approved editorial items across TikTok, Instagram, and WhatsApp.
 **2.2** The schedule MUST follow platform-specific rules:
   - TikTok: video clips ≤60s unless full music video
   - Instagram: mix of Reels (video), Feed posts (images), and Stories (24h time-sensitive)
@@ -19,14 +19,14 @@ An AI-powered social media manager agent for MainStay TV that handles content sc
 **2.3** The agent MUST store the schedule in the database with status: `scheduled`, `published`, `skipped`.
 **2.4** The agent MUST propose optimal posting times based on SA timezone (SAST, UTC+2).
 
-### 3. Artist Promotion — Caption & Copy Generation
-**3.1** The agent MUST generate platform-specific captions for each artist promotion post.
+### 3. Artist and Editorial Curation — Caption & Copy Generation
+**3.1** The agent MUST generate platform-specific captions for artist features and other approved MainStay editorial posts.
 **3.2** Captions MUST include:
   - Hook line (first 1-2 sentences, no hashtags — keeps the algorithm happy)
-  - Body copy (artist context, track name, vibe)
-  - Call to action (follow, stream, share)
-  - Hashtag block: artist hashtags + MainStay TV pillars
-**3.3** The agent MUST adapt tone per platform:
+  - Body copy with accurate context for the featured artist, track, story, or media
+  - Call to action appropriate to the post (follow, stream, watch, share)
+  - Relevant hashtags; do not force music-only tags onto non-music coverage
+**3.3** The agent MUST preserve MainStay's channel voice and adapt tone per platform:
   - TikTok: short, punchy, hook-first
   - Instagram: slightly longer, storytelling-friendly
   - WhatsApp: direct announcement style, no fluff

@@ -1,9 +1,14 @@
-# Social Media Manager Agent — Design
+# MainStay Curation Agent — Design
+
+MainStay (@mainstay) is an entertainment and culture curation channel. Music
+and artist promotion are part of its programming, not the whole concept. This
+design describes the existing social publishing workflow; no YouTube/Spotify
+account connection or listening-history ingestion is implemented here.
 
 ## Architecture Overview
 
 ```
-MainStay TV Agent
+MainStay Curation Agent
 │
 ├── MCP Servers (tools layer)
 │   ├── filesystem    → read Content-data/, write reports
@@ -17,7 +22,7 @@ MainStay TV Agent
 │   ├── Scheduler           → builds weekly calendar
 │   ├── Caption Generator   → per-platform copy
 │   ├── Publisher           → Playwright-driven or manual guide
-│   ├── Top-3 Compiler      → weekly report generator
+│   ├── Top-3 Compiler      → weekly music feature and report generator
 │   └── Analytics Logger    → engagement tracking
 │
 └── Output
@@ -163,13 +168,17 @@ CREATE TABLE weekly_reports (
 - Feed: upload image → caption → tag artist
 
 ### WhatsApp Channel
-- Navigate to web.whatsapp.com → MainStayTV channel
+- Navigate to web.whatsapp.com → MainStay channel
 - Broadcast format: announcement text + media attachment
-- Max 2x per week — save for real drops only
+- Max 2x per week — reserve for meaningful drops or selected editorial updates
 
 ## Weekly Schedule Template
 
-| Day | Platform | Content Type | Artist |
+This is a starting cadence, not a music-only mandate. Choose suitable
+available media and approved editorial items; keep the Top-3 as a weekly
+music feature within broader culture programming.
+
+| Day | Platform | Content Type | Editorial Item |
 |-----|----------|-------------|--------|
 | Monday | Instagram Feed | Promo image | Rotating |
 | Tuesday | TikTok | Music video clip | Rotating |
@@ -177,16 +186,16 @@ CREATE TABLE weekly_reports (
 | Thursday | TikTok | Full video or street mix | Rotating |
 | Friday | Instagram Reel | New drop highlight | Rotating |
 | Friday | WhatsApp | Drop announcement | Rotating |
-| Sunday | Instagram Feed | Weekly Top-3 graphic | MainStay TV |
+| Sunday | Instagram Feed | Weekly Top-3 graphic | MainStay |
 
 ## Caption Formula
 
 ```
 [HOOK — 1 sentence, no hashtags]
 
-[BODY — 2-3 sentences: artist, track, vibe, context]
+[BODY — 2-3 sentences: accurate context for the artist, track, story, or moment]
 
 [CTA — follow/stream/share instruction]
 
-[HASHTAGS — artist tags + #MainStayTV #NewMusic #SouthAfricanMusic #AfricanMusic #VaalMusic]
+[HASHTAGS — relevant artist/topic tags + suitable MainStay and South African culture tags; do not force music hashtags onto non-music coverage]
 ```
