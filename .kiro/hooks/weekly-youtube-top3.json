@@ -1,0 +1,12 @@
+{
+  "name": "Weekly YouTube Top 3 (YouTube-only)",
+  "version": "1.0.0",
+  "description": "User-triggered workflow to prepare, review, and publish one weekly Top 3 video to YouTube. YouTube is the only destination; Spotify data and content are excluded.",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Prepare and publish the weekly YouTube Top 3 package. Steps: 1) Ask the editor for a unique package ID, a week label, and exactly three distinct ordered tracks. Each track must include a title, artist, position (1, 2, or 3), and a human-provided non-Spotify editorial source. Reject fewer or more than three tracks, duplicates, or Spotify-derived inputs. 2) Ask for a finished video reference, title, description, thumbnail reference, and publication rights confirmation for every included media item (video, thumbnail, each track recording). Keep the package in `draft` and identify any missing field or clearance. 3) Persist the package and its tracks/clearances in agent/mainstay.db using the weekly_top3_* tables; do not store account credentials. 4) Present all materials, the intended YouTube channel, and rights confirmations for review; allow the editor to return the package to `draft` for corrections. 5) Require explicit editor approval before submission; set status to `approved` only after approval with approver identity and time. 6) Verify the signed-in YouTube channel is the intended MainStay TV channel; stop if it is not. 7) Leave the final YouTube publish action to the editor using the existing browser-assisted/manual publishing convention; do not perform unattended public publication and do not use the YouTube API. 8) Record `published` only after YouTube visibly confirms the upload and a video reference is captured, with confirmation time. 9) If YouTube rejects or the outcome is uncertain, record the attempt as `rejected` or `unresolved` with an outcome note, never as `published`; preserve the package for review. 10) Before retrying an `unresolved` attempt, check the channel's recent videos; if a video exists, associate it with the original attempt instead of creating a second publication. 11) Ensure Spotify Platform data or Spotify Content is never accepted, used, displayed, or distributed."
+  }
+}

@@ -32,7 +32,7 @@ All artist media lives in `Content-data/<artist-name>/`:
 1. **Content Scheduling** — propose and track a weekly posting calendar
 2. **Artist Promotion** — generate captions, hashtags, and copy for each artist
 3. **Cross-Platform Publishing** — coordinate content flow: TikTok → Instagram Reels → WhatsApp broadcast
-4. **Weekly Top-3 Compiler** — surface the top 3 tracks/artists of the week based on engagement data
+4. **Weekly Top-3 Compiler** — editorial selection for the YouTube Top 3 package; engagement-based weekly reports are a separate feature and are never an input to track selection
 5. **Analytics Awareness** — note what performed well and adjust future scheduling
 
 ## Brand Voice
@@ -54,3 +54,15 @@ The agent uses `agent/mainstay.db` (SQLite) to track:
 - WhatsApp channel is broadcast-only — use it for announcements, drops, and selected editorial updates, not daily content
 - TikTok clips should be under 60 seconds unless it's a full music video
 - Instagram Stories expire in 24h — use them for time-sensitive drops
+
+## Weekly YouTube Top 3 (YouTube-only)
+
+- Track selection and ordering are editor-provided; this feature must not calculate
+  rankings from streaming or listening data.
+- This feature must not access, use, display, or distribute Spotify Platform data
+  or Spotify Content.
+- Confirmed publication rights and explicit editor approval are required before
+  submission.
+- Stop if the selected YouTube channel is not MainStay TV.
+- Never treat an unconfirmed or interrupted submission as published; unresolved
+  attempts must be reconciled against the channel before retry.

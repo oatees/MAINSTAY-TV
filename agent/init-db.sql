@@ -142,3 +142,72 @@ LEFT JOIN captions c ON c.post_id = p.id
 LEFT JOIN assets a ON a.id = p.asset_id
 LEFT JOIN artists ar ON ar.id = p.artist_id
 WHERE p.scheduled_date BETWEEN date('now','weekday 0','-6 days') AND date('now','weekday 0');
+
+-- ─────────────────────────────────────────
+-- WEEKLY TOP 3 (YouTube-only feature)
+-- ─────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS weekly_top3_packages (
+  id                TEXT PRIMARY KEY CHECK(length(trim(id)) > 0),
+  week_label        TEXT NOT NULL UNIQUE,
+  video_ref         TEXT,
+  title             TEXT,
+  description       TEXT,
+  thumbnail_ref     TEXT,
+  status            TEXT NOT NULL DEFAULT 'draft' CHECK(status IN (
+                      'draft','review','approved','publishing',
+                      'published','rejected','unresolved'
+                    )),
+  approved_by       TEXT,
+  approved_at       DATETIME,
+  created_at        DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at        DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS weekly_top3_tracks (
+  id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+  package_id          TEXT NOT NULL REFERENCES weekly_top3_packages(id) ON DELETE CASCADE,
+  position            INTEGER NOT NULL CHECK(position IN (1,2,3)),
+  track_title         TEXT NOT NULL,
+  artist_name         TEXT NOT NULL,
+  editorial_source    TEXT NOT NULL,
+  rights_confirmed_by TEXT,
+  rights_confirmed_at DATETIME,
+  UNIQUE(package_id, position),
+  UNIQUE(package_id, track_title, artist_name)
+);
+
+CREATE TABLE IF NOT EXISTS weekly_top3_clearances (
+  id             INTEGER PRIMARY KEY AUTOINCREMENT,
+  package_id     TEXT NOT NULL REFERENCES weekly_top3_packages(id) ON DELETE CASCADE,
+  media_ref      TEXT NOT NULL,
+  rights_status  TEXT NOT NULL DEFAULT 'pending' CHECK(rights_status IN ('pending','confirmed')),
+  confirmed_by   TEXT,
+  confirmed_at   DATETIME,
+  UNIQUE(package_id, media_ref),
+  CHECK (
+    (rights_status = 'confirmed' AND confirmed_by IS NOT NULL AND confirmed_at IS NOT NULL)
+    OR (rights_status = 'pending')
+  )
+);
+
+CREATE TABLE IF NOT EXISTS youtube_publication_attempts (
+  id                INTEGER PRIMARY KEY AUTOINCREMENT,
+  package_id        TEXT NOT NULL REFERENCES weekly_top3_packages(id) ON DELETE CASCADE,
+  channel_identity  TEXT NOT NULL,
+  status            TEXT NOT NULL DEFAULT 'pending' CHECK(status IN (
+                      'pending','published','rejected','unresolved'
+                    )),
+  youtube_video_ref  TEXT,
+  attempted_at      DATETIME DEFAULT CURRENT_TIMESTAMP,
+  confirmed_at      DATETIME,
+  outcome_note      TEXT,
+  CHECK (status <> 'published' OR youtube_video_ref IS NOT NULL),
+  CHECK (
+    (status IN ('rejected','unresolved') AND outcome_note IS NOT NULL)
+    OR (status IN ('pending','published'))
+  )
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_one_published_per_package
+  ON youtube_publication_attempts(package_id)
+  WHERE status = 'published';

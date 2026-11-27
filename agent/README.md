@@ -52,6 +52,28 @@ If you don't have sqlite3 installed: https://sqlite.org/download.html
 ### 5. Get the weekly report
 > "Compile the weekly Top-3 report"
 
+## Weekly YouTube Top 3 (YouTube-only)
+
+MainStay also runs a weekly Top 3 music feature that publishes one video to
+YouTube only. The workflow is user-triggered via
+`.kiro/hooks/weekly-youtube-top3.json` and uses the existing SQLite schema
+(`weekly_top3_packages`, `weekly_top3_tracks`, `weekly_top3_clearances`,
+`youtube_publication_attempts`).
+
+Requirements:
+- Exactly three distinct, ordered, editor-selected tracks with non-Spotify
+  editorial sources.
+- A finished video, title, description, and thumbnail, plus confirmed
+  publication rights for all included media.
+- Explicit editor approval before submission.
+- The editor completes the final YouTube publish action (browser-assisted;
+  no YouTube API or unattended public publishing).
+- `published` is recorded only after YouTube visibly confirms and returns a
+  video reference.
+- Rejected or uncertain submissions are recorded as `rejected` or `unresolved`
+  and are reconciled against the channel before any retry.
+- No Spotify Platform data or Spotify Content is used.
+
 ## Platforms
 
 | Platform | Handle |
