@@ -1,0 +1,16 @@
+# Research artifacts (heavy / regenerable) — keep text + small assets
+research/**/video.mp4
+research/**/page.html
+research/**/frames/
+research/**/contact_*.jpg
+research/canva_candidates/
+research/**/banner.png
+
+# Python
+__pycache__/
+*.pyc
+.tools_cache/
+
+# OS
+Thumbs.db
+.DS_Store
